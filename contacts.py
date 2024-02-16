@@ -48,18 +48,18 @@ class Email(Field):
 
     @value.setter
     def value(self, new_value):
-        if self.validate_email_format(new_value):
-            self.__value = new_value
-        else:
-            raise ValueError
-
-    def validate_email_format(self, email):
-        regex = re.compile(r"([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+")
         try:
-            re.fullmatch(regex, email) == True
+            self.validate_email_format(new_value)
+            self.__value = new_value
+        except ValueError:
+            print('incorrect EMAIL format')
+              
+    def validate_email_format(self, email):
+        regex = re.compile(r"([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Za-z]{2,})+")
+        if regex.fullmatch(email):
             print('Email is ok')
             return True
-        except ValueError:
+        else:
             print("Invalid email")
             return False
 
