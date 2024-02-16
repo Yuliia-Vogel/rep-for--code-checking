@@ -35,7 +35,7 @@ class ContactBot:
 
     def phone(self, name):
         record = self.address_book.find(name)
-        return record.phones if record else "Contact not found"
+        return record.phones if record else "Contact not found" # зробити аналогічнj для email
 
     def show_all(self):
         if not self.address_book:
@@ -58,7 +58,7 @@ class ContactBot:
     def add_email(self, data):
         print(data)
         try:
-            name, email = data.split(' ')
+            name, email = data.rsplit(' ')
             print(name, email)
             if name in self.address_book:
                 self.address_book[name].email = Email(email)
@@ -94,13 +94,13 @@ class ContactBot:
                 return self.add_email(data)
             elif user_input == "hello":
                 return self.hello()
-            elif user_input.startswith("add"):
+            elif user_input.startswith("add"): # add_user
                 data = user_input[4:]
                 return self.add(data)
-            elif user_input.startswith("change"):
+            elif user_input.startswith("change"): # change_phone
                 data = user_input[7:]
                 return self.change(data)
-            elif user_input.startswith("phone"):
+            elif user_input.startswith("phone"): # show_phone
                 name = user_input[6:]
                 return self.phone(name)
             elif user_input == "show all":
@@ -120,4 +120,9 @@ if __name__ == "__main__":
     bot = ContactBot(address_book)
     while True:
         print(bot.main())
-
+    # record1 = Record()
+    # mail1 = Email('mail.the@mail.com')
+    # record1.add_phone(mail1)
+    # mail2 = Email('mail.the___mail.com')
+    # mail3 = Email('mailthemailcom')
+    

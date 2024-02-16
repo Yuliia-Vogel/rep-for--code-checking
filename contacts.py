@@ -84,17 +84,17 @@ class Record:
         self.birthday = Birthday(birthday)
         self.email = Email(email)
 
-    def add_phone(self, phone):
+    def add_phone(self, phone): # можна аналогічно зробити для email
         self.phones.append(str(phone))  
 
-    def remove_phone(self, phone):
+    def remove_phone(self, phone): # можна аналогічно зробити для email
         self.phones.remove(phone)
 
-    def edit_phone(self, old_phone, new_phone):
+    def edit_phone(self, old_phone, new_phone): # можна аналогічно зробити для email
         index = self.phones.index(old_phone)
         self.phones[index] = new_phone
 
-    def find_phone(self, phone):
+    def find_phone(self, phone): # можна аналогічно зробити для email
         return phone in self.phones
 
     def days_to_birthday(self):
@@ -143,6 +143,7 @@ class AddressBook(UserDict):
         with open(self.filename, "w") as fh:
             json.dump([{"name": record.name.value,
                         "phones": record.phones,
+                        "email" : str(record.email), 
                         "birthday": str(record.birthday)} for record in self.data.values()], fh, indent=4)
 
     def load_from_json(self):
@@ -166,6 +167,6 @@ class AddressBook(UserDict):
 
 
 
-mail1 = Email('mail.the@mail.com')
-mail2 = Email('mail.the___mail.com')
-mail3 = Email('mailthemailcom')
+# mail1 = Email('mail.the@mail.com')
+# mail2 = Email('mail.the___mail.com')
+# mail3 = Email('mailthemailcom')
